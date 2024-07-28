@@ -1,5 +1,7 @@
-import { signInWithGoogle, registerUserWhitEmailPassword, loginWithEmailPassword } from '../../firebase/providers.js';
+import { signInWithGoogle, registerUserWhitEmailPassword, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
 import { checkingCredentials, logout, login } from './authSlice.js';
+
+import { useNavigate } from 'react-router-dom';
 
 export const checkingAuthentication = () => {
 
@@ -18,6 +20,7 @@ export const startGoogleSignIn = () => {
         if( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
         dispatch( login( result ) );
+        const navigate = useNavigate();
     }
 }
 
@@ -47,4 +50,13 @@ export const startLoginWithEmailPassword = ({email, password}) => {
         dispatch( login( result ) );
     }
 
+}
+export const startLogout = () => {
+    return async( dispatch ) => {
+        
+        await logoutFirebase();
+
+        dispatch( logout() );
+
+    }
 }
