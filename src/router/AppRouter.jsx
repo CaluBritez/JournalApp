@@ -13,7 +13,6 @@ export const AppRouter = () => {
     if( status === 'checking' ){
         return <CheckingAuth />
     }
-    console.log("soy el log principal: "+status);
 
     return (
         <Routes>
