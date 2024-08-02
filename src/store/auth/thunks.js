@@ -1,5 +1,6 @@
 import { signInWithGoogle, registerUserWhitEmailPassword, loginWithEmailPassword, logoutFirebase } from '../../firebase/providers.js';
 import { checkingCredentials, logout, login } from './authSlice.js';
+import { clearNotesLogout } from '../journal/journalSlice.js';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -56,6 +57,7 @@ export const startLogout = () => {
         
         await logoutFirebase();
 
+        dispatch( clearNotesLogout() );
         dispatch( logout() );
 
     }
